@@ -11,4 +11,12 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    css: {
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler', // or "modern"
+                silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import']
+            }
+        }
+    },
 });

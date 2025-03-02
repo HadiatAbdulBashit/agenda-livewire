@@ -37,11 +37,15 @@
                     <ul class="navbar-nav me-auto">
                         <li>
                             <a class="nav-link {{ Request::is('counter*') ? 'active' : '' }}" aria-current="page"
-                                href="/counter">Counter</a>
+                                wire:navigate href="/counter">Counter</a>
                         </li>
                         <li>
                             <a class="nav-link {{ Request::is('note*') ? 'active' : '' }}" aria-current="page"
-                                href="/note">Note</a>
+                                wire:navigate href="/note">Note</a>
+                        </li>
+                        <li>
+                            <a class="nav-link {{ Request::is('product*') ? 'active' : '' }}" aria-current="page"
+                                wire:navigate href="/product">Product</a>
                         </li>
                     </ul>
 
