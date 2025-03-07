@@ -36,16 +36,8 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li>
-                            <a class="nav-link {{ Request::is('counter*') ? 'active' : '' }}" aria-current="page"
-                                wire:navigate href="/counter">Counter</a>
-                        </li>
-                        <li>
-                            <a class="nav-link {{ Request::is('note*') ? 'active' : '' }}" aria-current="page"
-                                wire:navigate href="/note">Note</a>
-                        </li>
-                        <li>
-                            <a class="nav-link {{ Request::is('product*') ? 'active' : '' }}" aria-current="page"
-                                wire:navigate href="/product">Product</a>
+                            {{-- <a class="nav-link {{ Request::is('counter*') ? 'active' : '' }}" aria-current="page"
+                                wire:navigate href="/counter">Counter</a> --}}
                         </li>
                     </ul>
 
