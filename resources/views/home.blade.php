@@ -10,7 +10,7 @@
                 </div>
 
                 <livewire:add-plan-component />
-                <livewire:list-plant-component />
+                <livewire:list-plan-component />
             </div>
         </div>
     </div>

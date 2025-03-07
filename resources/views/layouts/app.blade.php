@@ -36,8 +36,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li>
-                            {{-- <a class="nav-link {{ Request::is('counter*') ? 'active' : '' }}" aria-current="page"
-                                wire:navigate href="/counter">Counter</a> --}}
                         </li>
                     </ul>
 

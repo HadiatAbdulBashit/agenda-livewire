@@ -12,11 +12,11 @@ class AddPlanComponent extends Component
 {
 
     #[Rule('required|min:3')]
-    public $task;
+    public $task = '';
     #[Rule('required')]
-    public $tag_id;
+    public $tag_id = '';
     #[Rule('required')]
-    public $priority;
+    public $priority = '';
     public $tags;
 
     public function mount()
@@ -26,7 +26,7 @@ class AddPlanComponent extends Component
 
     public function save()
     {
-        dd($this->tag_id[0]);
+        // dd($this->tag_id ? $this->tags->where('id', $this->tag_id)->first()?->name : 'Tag');
         $this->validate([
             'task' => 'required|min:3',
             'tag_id' => 'required',
@@ -41,6 +41,7 @@ class AddPlanComponent extends Component
         ]);
 
         $this->reset();
+        $this->dispatch('loadPlans');
     }
 
     #[On('loadTags')]
@@ -51,8 +52,7 @@ class AddPlanComponent extends Component
 
     public function render()
     {
-        return view('livewire.add-plan-component', [
-            'tags' => Tag::all()
-        ]);
+        $this->tags = Tag::all();
+        return view('livewire.add-plan-component');
     }
 }
