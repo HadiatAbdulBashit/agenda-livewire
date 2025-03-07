@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tag extends Model
 {
+    protected $fillable = [
+        'name',
+    ];
 
     public function plans(): HasMany
     {
