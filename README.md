@@ -15,7 +15,7 @@ Sebelum menginstal aplikasi, pastikan Anda telah menginstal perangkat lunak beri
 Jalankan perintah berikut untuk mengunduh kode sumber aplikasi:
 ```sh
  git clone https://github.com/HadiatAbdulBashit/agenda-livewire.git
- cd agenda-app
+ cd agenda-livewire
 ```
 
 ### 2. Instal Dependensi Laravel
@@ -62,6 +62,8 @@ Jalankan perintah berikut untuk memulai server aplikasi:
  php artisan serve
 ```
 Akses aplikasi di browser melalui: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+Signin dan login terlebih dahulu untuk menggunakan aplikasi!
 
 ## Fitur Aplikasi
 - Menambahkan agenda baru
