@@ -3,9 +3,9 @@
         <p class="text-center text-muted">Belum ada agenda silakan tambahkan terlebih dahulu</p>
     @else
         @foreach ($plans as $plan)
-            <div class="my-2">
-                <p class="mb-0">Tag: {{ $plan->tag->name }}</p>
-                <div class="card">
+            <div class="my-4" wire:key='{{ $plan->id }}'>
+                <p class="mb-0 ms-2">Tag: #{{ $plan->tag->name }}</p>
+                <div class="card rounded-4">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -25,8 +25,7 @@
                                 </span>
                             </div>
                             <div class="d-flex gap-1">
-                                <button type="button" class="btn btn-sm"
-                                    wire:click='set("selectedPlanId", {{ $plan->id }})'>
+                                <button type="button" class="btn btn-sm" wire:click='editMode({{ $plan->id }})'>
                                     {{-- Gear Icon --}}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
@@ -51,19 +50,24 @@
                         </div>
                         <div class="mt-3">
                             @if ($selectedPlanId === $plan->id)
-                                <form wire:submit='updatePlan({{ $plan->id }})'>
-                                    <input type="text" class="form-control pl-0 @error('task') is-invalid @enderror"
-                                        id="validationServer05" aria-describedby="validationServer05Feedback" required
-                                        value="{{ $plan->task }}" wire:keydown.enter="search($event.target.value)">
-                                    <div id="validationServer05Feedback" class="invalid-feedback">
-                                        Please provide a valid zip.
-                                    </div>
+                                <form wire:submit.prevent='updatePlan'>
+                                    <input type="text" class="form-control @error('task') is-invalid @enderror"
+                                        id="task{{ $plan->id }}" aria-describedby="Task {{ $plan->id }}"
+                                        required value="{{ $plan->task }}" wire:model.defer="updatedTask">
+                                    <p class="text-muted mb-0 mt-1">Hit enter to finish edit</p>
+                                    @error('task')
+                                        <div id="task{{ $plan->id }}" class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </form>
                             @else
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value=""
-                                        id="flexCheckCheckedDisabled" {{ $selectedPlanId !== null ? 'disabled' : '' }}>
-                                    <label class="form-check-label" for="flexCheckCheckedDisabled">
+                                        id="plan{{ $plan->id }}" {{ $selectedPlanId !== '' ? 'disabled' : '' }}
+                                        wire:click='completePlan({{ $plan->id }})'
+                                        {{ $plan->is_completed ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="plan{{ $plan->id }}">
                                         {{ $plan->task }}
                                     </label>
                                 </div>

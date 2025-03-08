@@ -17,8 +17,8 @@
                 </button>
                 <ul class="dropdown-menu">
                     @foreach ($tags as $tag)
-                        <li>
-                            <div class="dropdown-item">
+                        <li wire:key='{{ $tag->id }}'>
+                            <label class="dropdown-item" for="tag{{ $tag->id }}">
                                 <div class="form-check">
                                     <input type="radio" class="form-check-input @error('tag_id') is-invalid @enderror"
                                         id="tag{{ $tag->id }}" name="tag_id" value="{{ $tag->id }}"
@@ -26,7 +26,7 @@
                                     <label class="form-check-label"
                                         for="tag{{ $tag->id }}">{{ $tag->name }}</label>
                                 </div>
-                            </div>
+                            </label>
                         </li>
                     @endforeach
                     <li>
@@ -38,7 +38,9 @@
                 </ul>
             </div>
             <div>
-                <button class="btn btn-success bg-success-subtle text-success-emphasis" type="submit"
+                <button
+                    class="btn {{ $task === '' || $tag_id === '' || $priority === '' ? 'btn-secondary' : 'btn-success bg-success-subtle text-success-emphasis' }}"
+                    type="submit"
                     {{ $task === '' || $tag_id === '' || $priority === '' ? 'disabled' : '' }}>Tambah</button>
             </div>
         </div>
