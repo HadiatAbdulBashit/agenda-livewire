@@ -8,19 +8,19 @@ use Livewire\Component;
 
 class AddTagComponent extends Component
 {
-    #[Rule('required')]
-    public $name = '';
+    #[Rule('required|min:3')]
+    public $nameTag = '';
 
     public function save()
     {
         $this->validate();
-
         Tag::create([
-            'name' => $this->name
+            'name' => $this->nameTag
         ]);
 
         $this->reset();
         $this->dispatch('loadTags');
+        $this->dispatch('closeModal', 'addTag');
     }
 
     public function render()

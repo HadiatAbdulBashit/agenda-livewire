@@ -1,35 +1,32 @@
 <div>
-    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addTag">
         Add Tag
     </button>
 
     @teleport('body')
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
-            wire:ignore>
-            <div class="modal-dialog">
+        <div class="modal fade" id="addTag" tabindex="-1" aria-labelledby="addTagLabel" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-body">
                         <form wire:submit='save'>
-                            <label for="validationServer05" class="form-label fs-4 text-center d-block">Tambah Tag
+                            <label for="tag" class="form-label fs-4 text-center d-block">Tambah Tag
                                 Disini</label>
-                            <div class="input-group has-validation">
-                                <div class="d-flex gap-2">
-
-                                    <div>
-                                        <input type="text"
-                                            class="form-control @error('name')
+                            <div class="d-flex gap-2">
+                                <div>
+                                    <input type="text"
+                                        class="form-control @error('nameTag')
                                             is-invalid
                                         @enderror"
-                                            wire:model='name' id="validationServer05"
-                                            aria-describedby="validationServer05Feedback">
-                                        <div id="validationServer05Feedback" class="invalid-feedback">
-                                            Please provide a valid zip.
+                                        wire:model='nameTag' id="tag" aria-describedby="tagFeedback">
+                                    @error('nameTag')
+                                        <div class="invalid-feedback d-block">
+                                            {{ $message }}
                                         </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    @enderror
                                 </div>
-                                <div class="invalid-feedback" id="tagNameFeedback">
-                                    Please choose a username.
+                                <div>
+                                    <button type="submit"
+                                        class="btn btn-success bg-success-subtle text-success-emphasis">Simpan</button>
                                 </div>
                             </div>
                         </form>
@@ -38,4 +35,24 @@
             </div>
         </div>
     @endteleport
+
+    {{-- @script --}}
+    <script>
+        window.addEventListener('closeModal', (event) => {
+            const modalId = event.detail;
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('show');
+            modal.setAttribute('aria-hidden', 'true');
+            modal.setAttribute('style', 'display: none');
+            modal.removeAttribute('aria-modal');
+            modal.removeAttribute('role');
+            const body = document.body;
+            body.classList.remove('modal-open')
+            body.setAttribute('style', '');
+
+            const modalsBackdrops = document.getElementsByClassName('modal-backdrop');
+            document.body.removeChild(modalsBackdrops[0]);
+        })
+    </script>
+    {{-- @endscript --}}
 </div>
